@@ -3,19 +3,17 @@ from streamlit_gsheets import GSheetsConnection
 import pandas as pd
 from datetime import datetime
 
-# --- CONFIGURACIÓN ---
-st.set_page_config(page_title="HOSPITAL - Gestión Cloud", page_icon="🏥")
-SECTORES = ["Guardia Central", "Internado", "UTI1", "UTI2", "Consultorios", "Quirófano"]
-CLAVE_ADMIN = "1234"
+# Configuración de página
+st.set_page_config(page_title="HOSPITAL - Gestión", page_icon="🏥")
 
-# --- CONEXIÓN A GOOGLE SHEETS ---
+# Conexión a Google Sheets
 conn = st.connection("gsheets", type=GSheetsConnection)
 
-def leer_datos():
-    return conn.read(ttl="0") # ttl="0" para que no guarde caché y lea siempre lo último
+# Leer datos (ttl=0 para que siempre esté actualizado)
+df = conn.read(ttl="0")
 
-# --- INTERFAZ ---
-st.title("🏥 Sistema de Gestión Hospitalaria")
+st.title("🏥 Control de Mantenimiento")
+# ... (aquí sigue el resto de tu código de formularios)
 menu = ["📝 Reportar Avería", "🔧 Panel de Ingeniería", "📊 Gestión"]
 choice = st.sidebar.selectbox("Menú Principal", menu)
 
